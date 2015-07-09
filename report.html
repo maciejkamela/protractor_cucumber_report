@@ -448,13 +448,14 @@
             /** Hide all scenario's steps */
             function displaySteps() {
                 removeClass(filtering_btn);
+                this.classList.add('active');
                 for (var i = 0; i < steps.length; i++) {
                     var display = steps[i].style.display;
                     if (display === 'none' || display === '') {
-                        this.classList.add('active');
+//                        this.classList.add('active');
                         steps[i].style.display = 'block';
                     } else {
-                        removeClass(filtering_btn);
+//                        removeClass(filtering_btn);
                         all_btn.classList.add('active');
                         steps[i].style.display = 'none';
                     }
