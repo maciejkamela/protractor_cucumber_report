@@ -272,7 +272,30 @@
             top: 300px;
             float: right;
         }
+        .report{
+            position: relative;
+            top:60px;
+            right: -390px;
+            float: right;
+            display: inline-block;
+        }
+        .scenario-chart{
+            display: none;
+        }
+        .donut-inner {
+            position: absolute;
+            top:470px;
+            left:150px;
+        }
 
+        .donut-inner h5 {
+            margin-bottom: 5px;
+            margin-top: 0;
+        }
+
+        .donut-inner span {
+            font-size: 15px;
+        }
 
     </style>
 
@@ -450,6 +473,16 @@
                         canvas.stroke();
                         df += (Math.PI * 2) * (parts[i] / 100);
                     }
+                    var a = 200;
+                    var b = 200;
+                    var text = '67.6%';
+                    chart.font = '20pt Calibri';
+                    chart.lineWidth = 3;
+                    chart.strokeStyle = 'blue';
+                    chart.textAlign = 'center';
+                    chart.textBaseline = 'middle';
+                    chart.fillText(text, a, b);
+
                 }
             }
 
@@ -464,17 +497,22 @@
                 parts: {"pt": [passed,failed]},//percentage of each parts
                 colors: {"cs": ["#73c904", "#c90417"]}//color of each part
             };
-
-
-
             var drawDount = new drawdountChart(chart);
             drawDount.set(200, 200, 130, 0, Math.PI * 2, 90, "blue");
             drawDount.draw(data);
-
-
         }
-    </script>
 
+        function displayChart() {
+            var checkBox = document.querySelector('.scenario-chart');
+            checkBox.style.display = 'none';
+              if(checkBox.style.display !== 'none') {
+                checkBox.style.display = 'block';
+            } else{
+                checkBox.style.display = 'block';
+            }
+        }
+        displayChart();
+    </script>
 </head>
 <body>
 
@@ -490,6 +528,10 @@
     <button data-state="passed" class="btn passed_btn" id="passed_btn">Passed</button>
     <button data-state="all" class="btn all_btn active" id="all_btn">All</button>
     <button data-state="display" class="btn display_btn display " id="display_btn">Display</button>
+    <button data-state="test" class="test_btn test " id="test_btn" onclick="displayChart()">test</button>
+</div>
+<div class="report">
+<input type="checkbox" class="checkBox-report">Generate chart
 </div>
 <div class="feature">
     <h2>Feature: As a Staff Member I want to select my ID or username and view Personal Dashboard so that I can manage my schedule, tasks and students</h2>
@@ -582,8 +624,13 @@
     Then I should see bookmark set on:
     
 </div></div>
-<div>
+<div class="scenario-chart">
     <canvas id="chart" class="chart" width="800" height="400">Your browser doesn't support HTML5 Canvas.</canvas>
+<div class="donut-inner">
+    <h5>66,67%</h5>
+    <span>Scenario passed</span>
 </div>
+</div>
+
 </body>
 </html>
