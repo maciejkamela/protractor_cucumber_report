@@ -266,36 +266,93 @@
 
         .display_btn {
             background: #0000FF;
+            width: 120px;
         }
-        .chart{
-            position: absolute;
-            top: 300px;
-            float: right;
-        }
-        .report{
-            position: relative;
-            top:60px;
-            right: -390px;
-            float: right;
-            display: inline-block;
-        }
-        .scenario-chart{
-            display: none;
-        }
-        .donut-inner {
-            position: absolute;
-            top:470px;
-            left:150px;
-        }
-
-        .donut-inner h5 {
-            margin-bottom: 5px;
-            margin-top: 0;
-        }
-
-        .donut-inner span {
+        .generate_chart {
+            color: white;
+            padding: 7px;
+            border: none;
+            width: 120px;
             font-size: 15px;
+            cursor: pointer;
+            opacity: 1;
+            transition: opacity 0.3s linear;
+            border-radius: 1px;
+            background: #993300;
         }
+       .scenario-chart {
+           text-align: center;
+           display: none;
+           position: absolute;
+           top: 59px;
+           width: 40%;
+           height: 500px;
+           background-color: white;
+           left: 29%;
+           border: 1px solid;
+           -webkit-box-shadow: 3px 10px 156px -29px rgba(0, 0, 0, 0.61);
+           -moz-box-shadow: 3px 10px 156px -29px rgba(0, 0, 0, 0.61);
+           box-shadow: 3px 10px 156px -29px rgba(0, 0, 0, 0.61);
+       }
+       .chart-title {
+           margin-top: 15px;
+           top: 40px;
+           width: 100%;
+       }
+        .chart-legend {
+            position: absolute;
+            bottom: 37px;
+            padding-left: 30px;
+            float: left;
+        }
+        .legend-details{
+            font-weight: bold;
+            font-size: 15px;
+            position: absolute;
+            float: left;
+            padding-left: 90px;
+            width: 200px;
+        }
+        .legend_passed {
+            color: #73c904;
+            display: inline-block;
+            padding: 15px;
+        }
+        .legend_failed {
+            color: #c90417;
+            display: inline-block;
+            padding: 15px;
+        }
+
+        .legend_passed::before {
+            content: "";
+            display: block;
+            float: left;
+            width: 10px;
+            height: 10px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            background: #73c904;
+        }
+
+        .legend_failed::before {
+            content: "";
+            display: block;
+            float: left;
+            width: 10px;
+            height: 10px;
+            margin-right: 5px;
+            background: #c90417;
+        }
+        .close_chart {
+            font-size: 30px;
+            position: relative;
+            float: right;
+            padding: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
 
     </style>
 
@@ -445,7 +502,7 @@
             var canvas = document.getElementById("chart");
             var chart = canvas.getContext("2d");
 
-            function drawdountChart(canvas) {
+            function DrawdountChart(canvas) {
 
                 this.x , this.y , this.radius , this.lineWidth ,this.from , this.to = null;
                 this.set = function (x, y, radius, from, to, lineWidth) {
@@ -489,33 +546,27 @@
             var scenarioPassed = document.querySelectorAll('.scenario.passed').length,
                     scenarioFailed = document.querySelectorAll('.scenario.failed').length,
                     scenariosAmount = document.querySelectorAll('.scenario').length,
-                    passed = (parseInt(scenarioPassed) / parseInt(scenariosAmount)) * 100,
-                    failed = (parseInt(scenarioFailed) / parseInt(scenariosAmount)) * 100;
-            var data =
-            {
+                    passed = (scenarioPassed / scenariosAmount) * 100,
+                    failed = (scenarioFailed / scenariosAmount) * 100;
+
+
+            var data = {
                 numberOfParts: scenariosAmount,// total amount of scenarios
                 parts: {"pt": [passed,failed]},//percentage of each parts
                 colors: {"cs": ["#73c904", "#c90417"]}//color of each part
             };
-            var drawDount = new drawdountChart(chart);
-            drawDount.set(200, 200, 130, 0, Math.PI * 2, 90, "blue");
+            var drawDount = new DrawdountChart(chart);
+            drawDount.set(200, 200, 130, 0, Math.PI * 2, 70, "blue");
             drawDount.draw(data);
         }
 
         function displayChart() {
-            var checkBox = document.querySelector('.scenario-chart');
-            checkBox.style.display = 'none';
-              if(checkBox.style.display !== 'none') {
-                checkBox.style.display = 'block';
-            } else{
-                checkBox.style.display = 'block';
-            }
+            var chart = document.querySelector('.scenario-chart');
+            chart.style.display = (chart.style.display != 'block' ? 'block' : 'none');
         }
-        displayChart();
     </script>
 </head>
 <body>
-
 <header class="failed">
     <h1>Cucumber features</h1>
     <div class="test-summary">
@@ -527,11 +578,8 @@
     <button data-state="failed" class="btn error_btn" id="error_btn">Error</button>
     <button data-state="passed" class="btn passed_btn" id="passed_btn">Passed</button>
     <button data-state="all" class="btn all_btn active" id="all_btn">All</button>
-    <button data-state="display" class="btn display_btn display " id="display_btn">Display</button>
-    <button data-state="test" class="test_btn test " id="test_btn" onclick="displayChart()">test</button>
-</div>
-<div class="report">
-<input type="checkbox" class="checkBox-report">Generate chart
+    <button data-state="display" class="btn display_btn display " id="display_btn">Display steps</button>
+    <button data-state="generate_chart" class="generate_chart" onclick="displayChart()">Display chart</button>
 </div>
 <div class="feature">
     <h2>Feature: As a Staff Member I want to select my ID or username and view Personal Dashboard so that I can manage my schedule, tasks and students</h2>
@@ -625,11 +673,14 @@
     
 </div></div>
 <div class="scenario-chart">
-    <canvas id="chart" class="chart" width="800" height="400">Your browser doesn't support HTML5 Canvas.</canvas>
-<div class="donut-inner">
-    <h5>66,67%</h5>
-    <span>Scenario passed</span>
-</div>
+    <div class = "close_chart">X</div>
+    <h1 class="chart-title">Scenario statistics</h1>
+    <canvas id="chart" class="chart" width="400" height="400">Your browser doesn't support HTML5 Canvas.</canvas>
+    <h2 class="chart-legend">Legend:</h2>
+    <div class="legend-details">
+    <div class="legend_passed">passed</div>
+    <div class="legend_failed">failed</div>
+    </div>
 </div>
 
 </body>
