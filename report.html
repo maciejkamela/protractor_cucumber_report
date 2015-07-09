@@ -269,16 +269,8 @@
             width: 120px;
         }
         .generate_chart {
-            color: white;
-            padding: 7px;
-            border: none;
             width: 120px;
-            font-size: 15px;
-            cursor: pointer;
-            opacity: 1;
-            transition: opacity 0.3s linear;
-            border-radius: 1px;
-            background: #993300;
+             background: #993300;
         }
        .scenario-chart {
            text-align: center;
@@ -293,8 +285,47 @@
            -webkit-box-shadow: 3px 10px 156px -29px rgba(0, 0, 0, 0.61);
            -moz-box-shadow: 3px 10px 156px -29px rgba(0, 0, 0, 0.61);
            box-shadow: 3px 10px 156px -29px rgba(0, 0, 0, 0.61);
+           -webkit-animation-name: display_chart;
+           -webkit-animation-duration: 0.5s;
+           -webkit-animation-timing-function: linear;
+           animation-name: display_chart;
+           animation-duration: 0.5s;
        }
-       .chart-title {
+        @-webkit-keyframes display_chart {
+            0% {
+                opacity: 0;
+                -webkit-transform: scale3d(.2, .2, .2);
+                transform: scale3d(.2, .2, .2);
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .close_chart {
+            font-size: 30px;
+            position: relative;
+            float: right;
+            padding: 10px;
+            font-weight: bold;
+            cursor: pointer;
+          }
+
+        @-webkit-keyframes hide_chart {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+                -webkit-transform: scale3d(.3, .3, .3);
+                transform: scale3d(.3, .3, .3);
+            }
+
+        }
+
+        .chart-title {
            margin-top: 15px;
            top: 40px;
            width: 100%;
@@ -344,14 +375,6 @@
             margin-right: 5px;
             background: #c90417;
         }
-        .close_chart {
-            font-size: 30px;
-            position: relative;
-            float: right;
-            padding: 10px;
-            font-weight: bold;
-            cursor: pointer;
-        }
 
 
     </style>
@@ -362,7 +385,11 @@
             var errors = document.querySelectorAll('.step.failed'),
                     filtering_btn = document.getElementsByClassName('btn'),
                     scenarios = document.querySelectorAll('.scenario-container'),
-                    display_btn = document.querySelector('.display');
+                    display_btn = document.querySelector('.display'),
+                    all_btn = document.querySelector('.all_btn'),
+                    steps = document.querySelectorAll('.step'),
+                    close_btn = document.querySelector('.close_chart'),
+                    displayChart_btn = document.querySelector('.generate_chart');
 
             /** Displaying detailed information about failed step */
 
@@ -383,7 +410,6 @@
 
             for (var i = 0; i < scenarios.length; i++) {
                 scenarios[i].onclick = function () {
-                    var steps = this.querySelectorAll('.step');
                     for (var k = 0; k < steps.length; k++) {
                         if (steps[k].style.display === 'block') {
                             steps[k].style.display = 'none';
@@ -422,12 +448,14 @@
             /** Hide all scenario's steps */
             function displaySteps() {
                 removeClass(filtering_btn);
-                var steps = document.querySelectorAll('.step');
                 for (var i = 0; i < steps.length; i++) {
                     var display = steps[i].style.display;
                     if (display === 'none' || display === '') {
+                        this.classList.add('active');
                         steps[i].style.display = 'block';
                     } else {
+                        removeClass(filtering_btn);
+                        all_btn.classList.add('active');
                         steps[i].style.display = 'none';
                     }
                 }
@@ -450,10 +478,9 @@
 
             /** Displaying all scenarios */
             function displayAllScenarios() {
-                var scenario = document.querySelectorAll('.scenario-container');
-                for (var i = 0; i < scenario.length; i++) {
-                    if (scenario[i].style.display != 'block') {
-                        scenario[i].style.display = 'block';
+                for (var i = 0; i < scenarios.length; i++) {
+                    if (scenarios[i].style.display != 'block') {
+                        scenarios[i].style.display = 'block';
                     }
                 }
             }
@@ -549,21 +576,37 @@
                     passed = (scenarioPassed / scenariosAmount) * 100,
                     failed = (scenarioFailed / scenariosAmount) * 100;
 
-
             var data = {
                 numberOfParts: scenariosAmount,// total amount of scenarios
                 parts: {"pt": [passed,failed]},//percentage of each parts
                 colors: {"cs": ["#73c904", "#c90417"]}//color of each part
             };
             var drawDount = new DrawdountChart(chart);
-            drawDount.set(200, 200, 130, 0, Math.PI * 2, 70, "blue");
-            drawDount.draw(data);
+                drawDount.set(200, 200, 130, 0, Math.PI * 2, 70, "blue");
+                drawDount.draw(data);
+
+            /** Close module with scenario chart using close button on chart module */
+            close_btn.onclick = function () {
+                document.querySelector('.scenario-chart').style.display = 'none';
+                displayAllScenarios();
+                removeClass(filtering_btn);
+                all_btn.classList.add('active');
+            }
+
+            /** Display module with scenario chart */
+            function displayChart() {
+                var chart = document.querySelector('.scenario-chart');
+                chart.style.display = (chart.style.display != 'block' ? 'block' : 'none');
+            }
+
+            /** Display chart with scenarios statistics*/
+                displayChart_btn.onclick = function(){
+                    removeClass(filtering_btn);
+                    this.classList.add('active');
+                    displayChart();
+            }
         }
 
-        function displayChart() {
-            var chart = document.querySelector('.scenario-chart');
-            chart.style.display = (chart.style.display != 'block' ? 'block' : 'none');
-        }
     </script>
 </head>
 <body>
@@ -579,7 +622,7 @@
     <button data-state="passed" class="btn passed_btn" id="passed_btn">Passed</button>
     <button data-state="all" class="btn all_btn active" id="all_btn">All</button>
     <button data-state="display" class="btn display_btn display " id="display_btn">Display steps</button>
-    <button data-state="generate_chart" class="generate_chart" onclick="displayChart()">Display chart</button>
+    <button data-state="generate_chart" class="btn generate_chart">Display chart</button>
 </div>
 <div class="feature">
     <h2>Feature: As a Staff Member I want to select my ID or username and view Personal Dashboard so that I can manage my schedule, tasks and students</h2>
