@@ -1,6 +1,7 @@
 var chart = {
+/** Drawing report's chart */
 
-    drawdountChart: function (canvas) {
+drawdountChart:function (canvas) {
     this.x , this.y , this.radius , this.lineWidth , this.from , this.to = null;
     this.set = function (x, y, radius, from, to, lineWidth) {
         this.x = x;
@@ -28,19 +29,21 @@ var chart = {
         }
     }
 },
-    getStatistics:function() {
-    var scenarioPassed = document.querySelectorAll('.scenario.passed').length,
-        scenarioFailed = document.querySelectorAll('.scenario.failed').length,
-        scenariosAmount = document.querySelectorAll('.scenario').length,
-        passed = (scenarioPassed / scenariosAmount) * 100,
-        failed = (scenarioFailed / scenariosAmount) * 100,
-        statistics;
-        statistics = {
-            scenariosAmount: scenariosAmount,
-            passed: passed,
-            failed: failed
-    };
-    return statistics;
-}
+    getStatistics:function () {
+        {
+            var scenarioPassed = document.querySelectorAll('.scenario.passed').length,
+                scenarioFailed = document.querySelectorAll('.scenario.failed').length,
+                scenariosAmount = document.querySelectorAll('.scenario').length,
+                passed = (scenarioPassed / scenariosAmount) * 100,
+                failed = (scenarioFailed / scenariosAmount) * 100,
+                statistics;
+            statistics = {
+                scenariosAmount: scenariosAmount,
+                passed: passed,
+                failed: failed
+            };
+            return statistics;
+        }
+    }
 
 }
