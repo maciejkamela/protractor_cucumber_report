@@ -109,7 +109,10 @@
             width: 100%;
             height: 60px;
         }
-
+        .scenarios-summary {
+            font-family: Roboto;
+            font-size: 14px;
+        }
         .passed {
             background: #388E3C;
         }
@@ -161,19 +164,19 @@
 
         .step.passed {
             background: #e1fcc2;
-            color: #4e8633;
+            color: #000;
             border-left: 5px solid #4e8633;
         }
 
         .step.skipped {
-            background: #E3F2FD;
-            color: #336086;
+            background: #AECEFF;
+            color: #000;
             border-left: 5px solid #336086;
         }
 
         .step.failed {
-            background: #FFEBEE;
-            color: #863333;
+            background: #FFB7B7;
+            color: #000;
             border-left: 5px solid #863333;
             cursor: pointer;
         }
@@ -245,14 +248,22 @@
             color: white;
             padding: 7px;
             border: none;
-            width: 100px;
-            height: 36px;
+            width: 115px;
+            height: 44px;
             font-size: 18px;
             cursor: pointer;
             transition: opacity 0.3s linear;
             border-radius: 3px;
+            -webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 1);
+            -moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 1);
+            box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 1);
         }
-
+        .btn:hover {
+            opacity: 1;
+            -webkit-box-shadow: 1px 3px 11px -1px rgba(0, 0, 0, 0.38);
+            -moz-box-shadow: 1px 3px 11px -1px rgba(0, 0, 0, 0.38);
+            box-shadow: 1px 3px 11px -1px rgba(0, 0, 0, 0.38);
+        }
         .btn:not(.active) {
             opacity: 0.3;
         }
@@ -273,29 +284,23 @@
         .passed_btn.active, .passed_btn:hover, .passed_btn.active:focus {
             background: #388E3C;
             color: white;
+            opacity: 1;
         }
 
         .error_btn.active, .error_btn:hover, .error_btn.active:focus {
             background: #c90417;
             color: white;
+            opacity: 1;
         }
-        .fa {
-            font-size: 28px;
-            width: 100px;
-            height: 35px;
-        }
-
-        .btn_menu{
-            border-radius: 3px;
-            border: none;
-            -webkit-box-shadow: 0px 9px 1px -7px rgba(0, 0, 0, 0.45);
-            -moz-box-shadow: 0px 9px 1px -7px rgba(0, 0, 0, 0.45);
-            box-shadow: 0px 9px 1px -7px rgba(0, 0, 0, 0.45);
+        .fa-list, .fa-pie-chart {
+            font-size: 23px;
+            color: #000;
         }
 
-        .generate_chart {
-            width: 120px;
-             background: #993300;
+        .fa-list.active, .fa-list:hover, .fa-list.active:focus,
+        .fa-pie-chart.active, .fa-pie-chart:hover {
+            color: black;
+            opacity: 1;
         }
        .scenario-chart {
            text-align: center;
@@ -330,11 +335,11 @@
         }
 
         .close_chart {
-            font-size: 30px;
+            font-size: 40px;
             position: relative;
             float: right;
-            padding: 10px;
-            font-weight: bold;
+            padding-right: 10px;
+            padding-top: 5px;
             cursor: pointer;
           }
 
@@ -366,7 +371,7 @@
             font-size: 18px;
             font-family: 'Roboto', sans-serif;
         }
-        .legend-details{
+        .legend-details {
             font-weight: bold;
             font-size: 15px;
             position: absolute;
@@ -375,14 +380,15 @@
             width: 200px;
         }
         .legend_passed {
-            color: #4CAF50;
+            color: #388E3C;
             display: inline-block;
             padding: 15px;
         }
         .legend_failed {
-            color: #FF5252;
+            color: #c90417;
             display: inline-block;
             padding: 15px;
+            position: relative;
         }
 
         .legend_passed::before {
@@ -393,7 +399,7 @@
             height: 10px;
             margin-right: 5px;
             margin-bottom: 5px;
-            background: #73c904;
+            background: #388E3C;
         }
 
         .legend_failed::before {
@@ -415,7 +421,6 @@
             opacity: 0.6;
             display: none;
             z-index:2;
-
         }
 
 
@@ -491,14 +496,14 @@
             /** Hide all scenario's steps */
             function displaySteps() {
                 removeClass(filtering_btn);
-                this.classList.add('active');
+//                this.classList.add('active');
                 for (var i = 0; i < steps.length; i++) {
                     var display = steps[i].style.display;
                     if (display === 'none' || display === '') {
-//                        this.classList.add('active');
+                        this.classList.add('active');
                         steps[i].style.display = 'block';
                     } else {
-//                        removeClass(filtering_btn);
+                        removeClass(filtering_btn);
                         all_btn.classList.add('active');
                         steps[i].style.display = 'none';
                     }
@@ -539,7 +544,7 @@
                 data = {
                     numberOfParts: statistics.scenariosAmount,// total amount of scenarios
                     parts: {"pt": [statistics.passed, statistics.failed]},//percentage of each parts
-                    colors: {"cs": ["#73c904", "#c90417"]}//color of each part
+                    colors: {"cs": ["#388e3c", "#c90417"]}//color of each part
             };
 
             function DrawdountChart(canvas) {
@@ -590,7 +595,6 @@
 
             }
 
-
             var drawDount = new DrawdountChart(chart);
                 drawDount.set(200, 200, 130, 0, Math.PI * 2, 70, "blue");
                 drawDount.draw(data);
@@ -621,12 +625,11 @@
                     c = this.getContext('2d'),
                     p = c.getImageData(x, y, 1, 1).data,
                     hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
-
                 /** Displaying text inside donout chart*/
                 var a = 200;
                 var b = 200;
 //                var text = hex;
-                chart.font = '30pt Calibri';
+                chart.font = '25pt Roboto';
                 chart.textAlign = 'center';
                 chart.fillStyle = 'blue';
                 var statistics = getStatistics();
@@ -689,8 +692,8 @@
     <button data-state="all" class="btn all_btn active btn-default btn_menu" id="all_btn">All</button>
     <button data-state="passed" class="btn passed_btn btn-default btn_menu" id="passed_btn">Passed</button>
     <button data-state="failed" class="btn error_btn btn-default btn_menu" id="error_btn">Error</button>
-    <button data-state="display" class="fa fa-list btn_menu" id="display_btn"></button>
-    <button data-state="generate_chart" class="fa fa-pie-chart btn_menu"></button>
+    <button data-state="display" class="btn fa fa-list btn_menu" id="display_btn"></button>
+    <button data-state="generate_chart" class=" btn fa fa-pie-chart btn_menu"></button>
 </div>
 <div class="feature">
     <h2>Feature: As a Staff Member I want to select my ID or username and view Personal Dashboard so that I can manage my schedule, tasks and students</h2>
@@ -783,10 +786,10 @@
 </div></div>
 
 <div class="scenario-chart">
-    <div class = "close_chart">X</div>
+    <div class = "close_chart fa fa-times"></div>
     <h1 class="chart-title">Scenario statistics</h1>
     <canvas id="chart" class="chart" width="400" height="400">Your browser doesn't support HTML5 Canvas.</canvas>
-    <h2 class="chart-legend" id ="legend"></h2>
+    <h2 class="chart-legend" id ="legend">Legend: </h2>
     <div class="legend-details">
     <div class="legend_passed">passed</div>
     <div class="legend_failed">failed</div>
