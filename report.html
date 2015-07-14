@@ -139,7 +139,6 @@
             padding: 10px;
             margin-top: 10px;
             margin-left: 45px;
-
             display: none;
         }
 
@@ -284,17 +283,6 @@
         .test-summary div {
             margin-top: 5px;
         }
-
-        .filtering-buttons {
-            display: inline-block;
-            position: relative;
-            float: right;
-            font-size: 35px;
-            text-align: center;
-            padding: 10px 0px 30px 30px;
-            margin-bottom: 10px;
-        }
-
         .btn {
             color: white;
             padding: 7px;
@@ -305,30 +293,34 @@
             cursor: pointer;
             transition: all 0.3s linear;
             border-radius: 3px;
-            -webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 1);
-            -moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 1);
-            box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 1);
-            border: none !important;
+            -webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.5);
+            -moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.5);
+            box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.5);
         }
 
         .btn:hover {
             opacity: 1;
-            -webkit-box-shadow: 1px 3px 11px -1px rgba(0, 0, 0, 0.38);
-            -moz-box-shadow: 1px 3px 11px -1px rgba(0, 0, 0, 0.38);
-            box-shadow: 1px 3px 11px -1px rgba(0, 0, 0, 0.38);
+            -webkit-box-shadow: 0px 2px 7px -2px rgba(0, 0, 0, 0.38);
+            -moz-box-shadow: 0px 2px 7px -2px rgba(0, 0, 0, 0.38);
+            box-shadow: 0px 2px 7px -2px rgba(0, 0, 0, 0.38);
         }
 
         .error_btn {
             background: #FF5252;
+            margin-left: 20px;
         }
 
         .passed_btn {
             background: #4CAF50;
+            margin-left: 20px;
         }
 
         .all_btn {
             background: #C4C7C7;
             color: black;
+        }
+        .btn.active {
+            opacity: 1;
         }
         .passed_btn:not(active), .error_btn:not(active), .all_btn:not(active) {
             opacity: 0.5;
@@ -339,14 +331,13 @@
             color: white;
             opacity: 1;
             border: none;
-
         }
 
         .all_btn.active, .all_btn.active:hover, .all_btn.active:focus,
         .all_btn:active, .all_btn:hover {
             background: #C4C7C7;
-            color: white;
-            opacity: 1;
+            color: black;
+
             border: none;
         }
 
@@ -364,16 +355,30 @@
             height: 45px;
         }
 
+        .btn_list{
+            margin-right: 20px;
+        }
         .btn_list:active, .btn_list:hover, .btn_list:focus,
         .btn_chart:active, .btn_chart:hover {
             color: black;
             opacity: 1;
         }
-        .filtering-buttons #display_btn
-        {
-            margin-left: 120px;
+        .main_btns {
+            margin-bottom: 50px;
+            margin-top: 50px;
         }
-        .scenario-chart {
+        .btn_menu {
+            width: 50%;
+            margin-left: 15px;
+        }
+        .btn_support {
+            float: left;
+        }
+        .additional_btns {
+            margin-bottom: 50px;
+            margin-top: 50px;
+        }
+          .scenario-chart {
             text-align: center;
             display: none;
             position: absolute;
@@ -451,14 +456,14 @@
         }
 
         .legend_passed {
-            color: #388E3C;
+            color: #4caf50;
             display: inline-block;
             padding: 10px;
             float: left;
         }
 
         .legend_failed {
-            color: #c90417;
+            color: #ff5252;
             display: inline-block;
             padding: 10px;
             float: left;
@@ -472,7 +477,7 @@
             height: 10px;
             margin-right: 5px;
             margin-bottom: 5px;
-            background: #388E3C;
+            background: #4caf50;
         }
 
         .legend_failed::before {
@@ -482,7 +487,7 @@
             width: 10px;
             height: 10px;
             margin-right: 5px;
-            background: #c90417;
+            background: #ff5252;
         }
 
         .document_container {
@@ -618,7 +623,7 @@
                     data = {
                         numberOfParts: statistics.scenariosAmount,// total amount of scenarios
                         parts: {"pt": [statistics.passed, statistics.failed]},//percentage of each parts
-                        colors: {"cs": ["#388e3c", "#c90417"]}//color of each part
+                        colors: {"cs": ["#4caf50", "#ff5252"]}//color of each part
                     };
 
             function DrawdountChart(canvas) {
@@ -767,14 +772,23 @@
     </div>
 </header>
 <div class="container">
-    <div class="filtering-buttons">
-        <button data-state="all" class="btn all_btn active btn-default btn_menu" id="all_btn">All</button>
-        <button data-state="passed" class="btn passed_btn btn-default btn_menu" id="passed_btn">Passed</button>
-        <button data-state="failed" class="btn error_btn btn-default btn_menu" id="error_btn">Error</button>
-        <button data-state="display" class="btn fa fa-list btn_menu btn_list" id="display_btn"></button>
-        <button data-state="generate_chart" class=" btn fa fa-pie-chart btn_menu btn_chart"></button>
+    <div class="row">
+        <div class="filtering-buttons">
+            <div class="col-lg-9 main_btns">
+                <div class ="btn_menu">
+                    <button data-state="all" class="btn all_btn active" id="all_btn">All</button>
+                    <button data-state="passed" class="btn passed_btn" id="passed_btn">Passed</button>
+                    <button data-state="failed" class="btn error_btn" id="error_btn">Error</button>
+                </div>
+            </div>
+            <div class="col-lg-3 additional_btns">
+                <div class="btn_support">
+                    <button data-state="display" class="btn fa fa-list btn_list" id="display_btn"></button>
+                    <button data-state="generate_chart" class=" btn fa fa-pie-chart btn_chart"></button>
+                </div>
+            </div>
+        </div>
     </div>
-
     <div class="row">
         <div class="col-sm-9">
             <div class="feature">
@@ -786,10 +800,10 @@
             </div>
         </div>
         <div class="col-sm-3">
-            <div class="scenario-label">scenarios</div>
+            <div class="scenario-label">Scenarios</div>
                 <div class="scenario-amount-passed">2/3 <br /><span>passed</span></div>
             <div class="clear"></div>
-            <div class="steps-label">steps</div>
+            <div class="steps-label">Steps</div>
                 <div class="steps-amount-passed">5/7 <br/><span>passed</span></div>
         </div>
     </div>
