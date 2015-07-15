@@ -82,7 +82,7 @@ var filters = {
     },
     /** Hide all scenario's steps */
     displaySteps: function (filtering_btn, steps, all_btn) {
-        var display_btn = document.querySelector('.display'),
+        var display_btn = document.querySelector('.btn_list'),
             self = this;
         display_btn.onclick = function () {
             self.removeClass(filtering_btn);
