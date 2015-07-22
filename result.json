@@ -1,0 +1,92 @@
+
+[
+  {
+    "id": "As-a-Staff-Member-I-want-to-view-all-follow-up-activities-and-create,-delete-and-edit-my-own-follow-up-activities-or-comments,",
+    "name": "As a Staff Member I want to view all follow-up activities and create, delete and edit my own follow up activities or comments,",
+    "description": "recorded for the student, so that I can see how all the staff have interacted with the student.",
+    "line": 2,
+    "keyword": "Feature",
+    "tags": [
+      {
+        "name": "@NSEST",
+        "line": 1
+      },
+      {
+        "name": "@followUp",
+        "line": 1
+      }
+    ],
+    "uri": "/home/maciejkamela/GIT/nse-learning-services-client/uat_tests/tests/stFollowUp.feature",
+    "elements": [
+      {
+        "name": "[NSESS-17a] Displaying follow-up activities list",
+        "id": "As-a-Staff-Member-I-want-to-view-all-follow-up-activities-and-create,-delete-and-edit-my-own-follow-up-activities-or-comments,;[nsess-17a]-displaying-follow-up-activities-list",
+        "line": 6,
+        "keyword": "Scenario",
+        "description": "",
+        "type": "scenario",
+        "tags": [
+          {
+            "name": "@NSESS-17",
+            "line": 5
+          }
+        ],
+        "steps": [
+          {
+            "name": "I log into dashboard as \"teacher1\"",
+            "line": 7,
+            "keyword": "Given ",
+            "result": {
+              "duration": 5278152787,
+              "status": "passed"
+            },
+            "match": {}
+          },
+          {
+            "name": "I create new follow up with following data:",
+            "line": 8,
+            "keyword": "When ",
+            "rows": [
+              {
+                "cells": [
+                  "action",
+                  "message",
+                  "hour",
+                  "minute",
+                  "date",
+                  "reachedStudent"
+                ]
+              },
+              {
+                "cells": [
+                  "email",
+                  "Newly created follow up!",
+                  "13",
+                  "15",
+                  "2014-01-12",
+                  "No"
+                ]
+              }
+            ],
+            "result": {
+              "error_message": "TypeError: Cannot read property 'isPresent' of undefined\n  at [object Object].ExpectedConditions.presenceOf (/home/maciejkamela/GIT/nse-learning-services-client/node_modules/protractor/lib/expectedConditions.js:233:23)\n  at [object Object].ExpectedConditions.visibilityOf (/home/maciejkamela/GIT/nse-learning-services-client/node_modules/protractor/lib/expectedConditions.js:261:10)\n  at [object Object].ExpectedConditions.elementToBeClickable (/home/maciejkamela/GIT/nse-learning-services-client/node_modules/protractor/lib/expectedConditions.js:148:12)\n  at Fn.Page.create.saveFollowUp.value (/home/maciejkamela/GIT/nse-learning-services-client/uat_tests/tests/page/ST/stFollowUpPage.js:102:36)\n  at World.<anonymous> (/home/maciejkamela/GIT/nse-learning-services-client/uat_tests/tests/context/ST/stFollowUpSteps.js:19:18)\n  at formatter.handleStepResultEvent (/home/maciejkamela/GIT/nse-learning-services-client/node_modules/grunt-protractor-runner/node_modules/protractor/lib/frameworks/cucumber.js:121:13)\n  at /home/maciejkamela/GIT/nse-learning-services-client/uat_tests/tests/context/loginSteps.js:64:69\n  at /home/maciejkamela/GIT/nse-learning-services-client/node_modules/grunt-protractor-runner/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/base.js:1582:15\n  at [object Object].webdriver.promise.ControlFlow.runInNewFrame_ (/home/maciejkamela/GIT/nse-learning-services-client/node_modules/grunt-protractor-runner/node_modules/protractor/node_modules/selenium-webdriver/lib/webdriver/promise.js:1654:20)\n  at notify (/home/maciejkamela/GIT/nse-learning-services-client/node_modules/grunt-protractor-runner/node_modules/protractor/node_modules/selenium-webdriver/lib/webdriver/promise.js:465:12)\n  at notifyAll (/home/maciejkamela/GIT/nse-learning-services-client/node_modules/grunt-protractor-runner/node_modules/protractor/node_modules/selenium-webdriver/lib/webdriver/promise.js:442:7)\n  at resolve (/home/maciejkamela/GIT/nse-learning-services-client/node_modules/grunt-protractor-runner/node_modules/protractor/node_modules/selenium-webdriver/lib/webdriver/promise.js:420:7)\n  at fulfill (/home/maciejkamela/GIT/nse-learning-services-client/node_modules/grunt-protractor-runner/node_modules/protractor/node_modules/selenium-webdriver/lib/webdriver/promise.js:535:5)\n  at Object.webdriver.promise.asap (/home/maciejkamela/GIT/nse-learning-services-client/node_modules/grunt-protractor-runner/node_modules/protractor/node_modules/selenium-webdriver/lib/webdriver/promise.js:776:5)\n  at [object Object].webdriver.promise.ControlFlow.runInNewFrame_ (/home/maciejkamela/GIT/nse-learning-services-client/node_modules/grunt-protractor-runner/node_modules/protractor/node_modules/selenium-webdriver/lib/webdriver/promise.js:1665:25)\n  at notify (/home/maciejkamela/GIT/nse-learning-services-client/node_modules/grunt-protractor-runner/node_modules/protractor/node_modules/selenium-webdriver/lib/webdriver/promise.js:465:12)\n  at notifyAll (/home/maciejkamela/GIT/nse-learning-services-client/node_modules/grunt-protractor-runner/node_modules/protractor/node_modules/selenium-webdriver/lib/webdriver/promise.js:442:7)\n  at resolve (/home/maciejkamela/GIT/nse-learning-services-client/node_modules/grunt-protractor-runner/node_modules/protractor/node_modules/selenium-webdriver/lib/webdriver/promise.js:420:7)\n  at [object Object].fulfill (/home/maciejkamela/GIT/nse-learning-services-client/node_modules/grunt-protractor-runner/node_modules/protractor/node_modules/selenium-webdriver/lib/webdriver/promise.js:535:5)\n  at /home/maciejkamela/GIT/nse-learning-services-client/node_modules/grunt-protractor-runner/node_modules/protractor/node_modules/selenium-webdriver/lib/webdriver/promise.js:1520:10\n  at /home/maciejkamela/GIT/nse-learning-services-client/node_modules/grunt-protractor-runner/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/base.js:1582:15\n  at [object Object].webdriver.promise.ControlFlow.runInNewFrame_ (/home/maciejkamela/GIT/nse-learning-services-client/node_modules/grunt-protractor-runner/node_modules/protractor/node_modules/selenium-webdriver/lib/webdriver/promise.js:1654:20)\n  at notify (/home/maciejkamela/GIT/nse-learning-services-client/node_modules/grunt-protractor-runner/node_modules/protractor/node_modules/selenium-webdriver/lib/webdriver/promise.js:465:12)\n  at notifyAll (/home/maciejkamela/GIT/nse-learning-services-client/node_modules/grunt-protractor-runner/node_modules/protractor/node_modules/selenium-webdriver/lib/webdriver/promise.js:442:7)\n  at resolve (/home/maciejkamela/GIT/nse-learning-services-client/node_modules/grunt-protractor-runner/node_modules/protractor/node_modules/selenium-webdriver/lib/webdriver/promise.js:420:7)\n  at fulfill (/home/maciejkamela/GIT/nse-learning-services-client/node_modules/grunt-protractor-runner/node_modules/protractor/node_modules/selenium-webdriver/lib/webdriver/promise.js:535:5)\n  at /home/maciejkamela/GIT/nse-learning-services-client/node_modules/grunt-protractor-runner/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/base.js:1582:15\n  at [object Object].webdriver.promise.ControlFlow.runInNewFrame_ (/home/maciejkamela/GIT/nse-learning-services-client/node_modules/grunt-protractor-runner/node_modules/protractor/node_modules/selenium-webdriver/lib/webdriver/promise.js:1654:20)\n  at notify (/home/maciejkamela/GIT/nse-learning-services-client/node_modules/grunt-protractor-runner/node_modules/protractor/node_modules/selenium-webdriver/lib/webdriver/promise.js:465:12)\n  at notifyAll (/home/maciejkamela/GIT/nse-learning-services-client/node_modules/grunt-protractor-runner/node_modules/protractor/node_modules/selenium-webdriver/lib/webdriver/promise.js:442:7)\n  at resolve (/home/maciejkamela/GIT/nse-learning-services-client/node_modules/grunt-protractor-runner/node_modules/protractor/node_modules/selenium-webdriver/lib/webdriver/promise.js:420:7)\n  at [object Object].fulfill (/home/maciejkamela/GIT/nse-learning-services-client/node_modules/grunt-protractor-runner/node_modules/protractor/node_modules/selenium-webdriver/lib/webdriver/promise.js:535:5)\n  at /home/maciejkamela/GIT/nse-learning-services-client/node_modules/grunt-protractor-runner/node_modules/protractor/node_modules/selenium-webdriver/lib/webdriver/promise.js:721:49\n  at /home/maciejkamela/GIT/nse-learning-services-client/node_modules/grunt-protractor-runner/node_modules/protractor/node_modules/selenium-webdriver/lib/webdriver/http/http.js:96:5\n  at IncomingMessage.<anonymous> (/home/maciejkamela/GIT/nse-learning-services-client/node_modules/grunt-protractor-runner/node_modules/protractor/node_modules/selenium-webdriver/http/index.js:131:7)\n  at IncomingMessage.emit (events.js:117:20)\n  at _stream_readable.js:944:16\n  at process._tickDomainCallback (node.js:486:13)\n",
+              "duration": 30185168,
+              "status": "failed"
+            },
+            "match": {}
+          },
+          {
+            "name": "I should see \"Newly created follow up!\" value in \"Notes\" column for the \"1\" row",
+            "line": 11,
+            "keyword": "Then ",
+            "result": {
+              "status": "undefined"
+            },
+            "match": {}
+          }
+        ]
+      }
+    ]
+  }
+
+] 
