@@ -2,7 +2,6 @@ var app = app || {};
 
 app.chart  = (function () {
 
-
   return {
 
     init: function () {
@@ -152,7 +151,8 @@ app.chart  = (function () {
     },
     /** Displaying and hiding chart */
     toggleChart: function () {
-      var chart = document.querySelector('.scenario-chart');
+      var chart = document.querySelector('.scenario-chart'),
+          chartBtn = document.querySelectorAll('.btn_chart');
 
       if (chart.style.display != 'block' ) {
         chart.style.display = 'block';
@@ -160,6 +160,7 @@ app.chart  = (function () {
       } else {
         chart.classList.add('chart-hidden');
         document.body.style.overflow = 'auto';
+        app.navigation.removeActiveClass(chartBtn);
       }
 
       this.toggleChartBackdrop();
